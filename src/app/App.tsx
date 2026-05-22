@@ -412,6 +412,7 @@ export default function App() {
             <div className="w-10" />
           </div>
 
+  console.log("Current Page:", currentPage);
           <main className="flex-1 overflow-auto p-4 md:p-8">
             {currentPage === 'overview' && <OverviewPage data={data} openMonth={openMonth} />}
             {currentPage === 'mes' && currentMonth && (
@@ -1387,3 +1388,4 @@ function MetasPage({ data, updateData }: { data: AppData; updateData: any }) {
     </div>
   );
 }
+// Build version: 1779493220
