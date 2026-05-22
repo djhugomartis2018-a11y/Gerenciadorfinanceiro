@@ -1,0 +1,238 @@
+/* Mobile Responsive Optimizations */
+
+/* Breakpoints */
+@media (max-width: 640px) {
+  /* Sidebar */
+  [data-slot="sidebar-container"] {
+    width: 100% !important;
+  }
+
+  /* Main content padding */
+  main {
+    padding: 1rem !important;
+  }
+
+  /* Cards grid */
+  [style*="gridTemplateColumns: repeat(auto-fit"]  {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Tables */
+  table {
+    font-size: 12px !important;
+  }
+
+  table th,
+  table td {
+    padding: 8px 12px !important;
+  }
+
+  /* Tabs */
+  [data-slot="tabs-list"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Charts */
+  [style*="height: 300px"],
+  [style*="height: 280px"],
+  [style*="height: 320px"] {
+    height: 200px !important;
+  }
+
+  /* Saldo Box */
+  [style*="display: grid"][style*="gridTemplateColumns: 1fr auto"] {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* Headings */
+  h1 {
+    font-size: 24px !important;
+  }
+
+  h2 {
+    font-size: 20px !important;
+  }
+
+  h3 {
+    font-size: 16px !important;
+  }
+
+  /* Buttons */
+  button {
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+  }
+
+  /* Input fields */
+  input {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+
+  /* Overflow handling */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Flex wrapping */
+  [style*="display: flex"][style*="justifyContent: space-between"] {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Adjust sidebar width on tablets */
+  [data-slot="sidebar-width"] {
+    --sidebar-width: 14rem;
+  }
+
+  /* Grid columns for medium screens */
+  [style*="gridTemplateColumns: repeat(4"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Reduce padding on medium screens */
+  main {
+    padding: 1.5rem !important;
+  }
+
+  /* Adjust chart heights */
+  [style*="height: 300px"] {
+    height: 250px !important;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  /* Increase tap target size */
+  button,
+  [role="button"],
+  input[type="checkbox"],
+  input[type="radio"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Remove hover effects on touch devices */
+  button:hover,
+  [role="button"]:hover {
+    transform: none !important;
+  }
+
+  /* Better spacing for touch */
+  [style*="gap: 12px"] {
+    gap: 16px !important;
+  }
+}
+
+/* Landscape mode adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+  /* Reduce vertical spacing in landscape */
+  main {
+    padding: 0.75rem !important;
+  }
+
+  [style*="marginBottom: 32px"] {
+    margin-bottom: 16px !important;
+  }
+
+  /* Reduce chart heights in landscape */
+  [style*="height: 300px"],
+  [style*="height: 280px"],
+  [style*="height: 320px"] {
+    height: 150px !important;
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  /* Ensure sufficient contrast */
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  /* Improve readability of text on dark backgrounds */
+  input,
+  textarea,
+  select {
+    background-color: var(--input-background);
+    color: var(--foreground);
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: more) {
+  /* Increase border visibility */
+  [style*="border: 1px solid"] {
+    border-width: 2px !important;
+  }
+
+  /* Increase text contrast */
+  body {
+    font-weight: 500;
+  }
+}
+
+/* Print styles */
+@media print {
+  /* Hide interactive elements */
+  button,
+  [data-slot="sidebar-trigger"],
+  input[type="text"],
+  input[type="number"] {
+    display: none !important;
+  }
+
+  /* Optimize for printing */
+  main {
+    padding: 0;
+  }
+
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+}
+
+/* Scrollbar styling for better mobile experience */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-bright);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-dim);
+}
+
+/* Safe area support for notched devices */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
