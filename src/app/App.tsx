@@ -59,7 +59,7 @@ ChartJS.register(
 ChartJS.defaults.color = '#999999';
 ChartJS.defaults.plugins.tooltip.backgroundColor = '#1a1a1a';
 ChartJS.defaults.plugins.tooltip.titleColor = '#fff';
-ChartJS.defaults.plugins.tooltip.bodyColor = '#b4f51d';
+ChartJS.defaults.plugins.tooltip.bodyColor = '#00ff41';
 ChartJS.defaults.plugins.tooltip.borderColor = 'rgba(255,255,255,0.1)';
 ChartJS.defaults.plugins.tooltip.borderWidth = 1;
 
@@ -508,12 +508,12 @@ function OverviewPage({ data, openMonth }: { data: AppData; openMonth: (m: strin
       {
         label: 'Entradas',
         data: allCalc.map((m) => m.rec),
-        borderColor: '#b4f51d',
-        backgroundColor: 'rgba(180, 245, 29, 0.1)',
+        borderColor: '#00ff41',
+        backgroundColor: 'rgba(0, 255, 65, 0.1)',
         fill: true,
         tension: 0.4,
         pointRadius: 4,
-        pointBackgroundColor: '#b4f51d'
+        pointBackgroundColor: '#00ff41'
       },
       {
         label: 'Saídas',
@@ -908,7 +908,7 @@ function GraficosTab({ data, currentMonth, calc }: any) {
     labels: ['Custos Fixos', 'Custos Variáveis', 'Saldo Livre'],
     datasets: [{
       data: [fixas, variaveis, Math.max(0, calc.saldo)],
-      backgroundColor: ['#ff4d4d', '#3d91ff', '#b4f51d'],
+      backgroundColor: ['#ff4d4d', '#3d91ff', '#00ff41'],
       borderWidth: 0,
       hoverOffset: 10
     }]
@@ -1065,7 +1065,7 @@ function MetasPage({ data, updateData }: any) {
                   </div>
                   <div className="h-3 bg-background rounded-full overflow-hidden border border-border">
                     <div 
-                      className="h-full bg-accent-lime shadow-[0_0_10px_rgba(180,245,29,0.5)] transition-all duration-1000" 
+                      className="h-full bg-accent-lime shadow-[0_0_15px_rgba(0,255,65,0.6)] transition-all duration-1000" 
                       style={{ width: `${perc}%` }} 
                     />
                   </div>
