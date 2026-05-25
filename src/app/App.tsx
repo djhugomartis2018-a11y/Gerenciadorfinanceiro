@@ -17,6 +17,7 @@ import { Doughnut, Bar, Line } from 'react-chartjs-2';
 import { LayoutGrid, TrendingUp, Target, User, Menu, X, Plus, Trash2, LogOut, ChevronRight, Wallet, ArrowUpCircle, ArrowDownCircle, Calendar } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { LoginPage } from './components/auth/LoginPage';
+import { LandingPage } from './components/landing/LandingPage';
 import { ProfilePage } from './components/profile/ProfilePage';
 import { Toaster, toast } from 'sonner';
 import {
@@ -169,6 +170,7 @@ export default function App() {
   const [currentMonth, setCurrentMonth] = useState<string | null>(null);
   const [currentTab, setCurrentTab] = useState<string>('resumo');
   const [newMonthInput, setNewMonthInput] = useState('');
+  const [showLanding, setShowLanding] = useState(true);
   const isMobile = useIsMobile();
 
   // Load data from Supabase
@@ -303,6 +305,14 @@ export default function App() {
   }
 
   if (!session) {
+    if (showLanding) {
+      return (
+        <>
+          <LandingPage onGetStarted={() => setShowLanding(false)} />
+          <Toaster richColors position="top-right" />
+        </>
+      );
+    }
     return (
       <>
         <LoginPage onLoginSuccess={async () => {
