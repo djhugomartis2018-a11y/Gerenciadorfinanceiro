@@ -287,13 +287,12 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-accent-purple to-accent-purple/70 rounded-lg flex items-center justify-center">
-                <span className="text-white font-black text-sm">N</span>
-              </div>
+              <img src="/logobranca" alt="NAVEX Finance" className="h-10 w-auto" />
+            </div>
               <span className="font-bold">NAVEX Finance</span>
             </div>
             <p className="text-sm text-text-dim">
-              © 2024 NAVEX Finance. Todos os direitos reservados.
+              © 2026 NAVEX Finance. Todos os direitos reservados.
             </p>
           </div>
         </div>
