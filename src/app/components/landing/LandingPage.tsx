@@ -97,11 +97,11 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             <div className="absolute inset-0 bg-white/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
             <img src="/logobranca.svg" alt="NAVEX Finance" className="w-20 h-20 relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" />
           </div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-white/60">
-            <a href="#recursos" className="hover:text-white transition-colors">Recursos</a>
-            <a href="#preços" className="hover:text-white transition-colors">Preços</a>
-            <a href="#como-funciona" className="hover:text-white transition-colors">Como funciona</a>
-          </div>
+	          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-white/60">
+	            <a href="#recursos" className="hover:text-white transition-colors">Recursos</a>
+	            <a href="#precos" className="hover:text-white transition-colors">Preços</a>
+	            <a href="#como-funciona" className="hover:text-white transition-colors">Como funciona</a>
+	          </div>
           <button 
             onClick={onGetStarted}
             className="px-6 py-2 rounded-full bg-white text-black text-sm font-bold hover:bg-white/90 transition-all"
@@ -308,8 +308,8 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="relative py-32 px-4 bg-white/[0.01] border-y border-white/5">
+	      {/* Pricing Section */}
+	      <section id="precos" className="relative py-32 px-4 bg-white/[0.01] border-y border-white/5">
         <PricingSection 
           plans={pricingPlans}
           title="Preços Simples e Transparentes"
