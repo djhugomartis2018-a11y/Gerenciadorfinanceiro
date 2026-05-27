@@ -331,8 +331,8 @@ export default function App() {
         <Sidebar className="border-r border-border" collapsible={isMobile ? "icon" : "none"}>
           <SidebarHeader className="px-6 py-8">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-accent-purple to-accent-purple/70 rounded-xl flex items-center justify-center shadow-lg shadow-accent-purple/30">
-                <span className="text-white font-black text-lg">N</span>
+              <div className="w-10 h-10 flex items-center justify-center">
+                <img src="/logobranca.svg" alt="Logo" className="w-8 h-8" />
               </div>
               <div>
                 <h1 className="text-lg font-black tracking-tighter leading-none bg-gradient-to-r from-accent-purple to-accent-lime bg-clip-text text-transparent">NAVEX FINANCE</h1>
