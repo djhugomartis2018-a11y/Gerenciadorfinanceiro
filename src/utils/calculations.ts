@@ -1,4 +1,4 @@
-import type { Transaction, DashboardSummary, CategorySummary, MonthlyTrend } from '../types/finance.types'
+import type { TransactionWithCategory, DashboardSummary, CategorySummary, MonthlyTrend } from '../types/finance.types'
 import { getLastNMonths } from './date'
 import { format, parseISO } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
@@ -17,8 +17,8 @@ export const calcGoalProgress = (current: number, target: number): number => {
 }
 
 export const buildDashboardSummary = (
-  transactions: Transaction[]
-): DashboardSummary => {
+  transactions: TransactionWithCategory[]
+): Omit<DashboardSummary, 'subscriptionsTotal' | 'installmentsTotal'> => {
   const income = transactions
     .filter((t) => t.type === 'income')
     .reduce((sum, t) => sum + Number(t.amount), 0)
@@ -31,7 +31,7 @@ export const buildDashboardSummary = (
   const savingsRate = calcSavingsRate(income, expenses)
 
   // top categories
-  const categoryMap = new Map<string, { total: number; count: number; category: Transaction['categories'] }>()
+  const categoryMap = new Map<string, { total: number; count: number; category: TransactionWithCategory['categories'] }>()
   transactions
     .filter((t) => t.type === 'expense' && t.categories)
     .forEach((t) => {
@@ -61,12 +61,8 @@ export const buildDashboardSummary = (
     const monthTx = transactions.filter(
       (t) => t.transaction_date >= start && t.transaction_date <= end
     )
-    const mIncome = monthTx
-      .filter((t) => t.type === 'income')
-      .reduce((s, t) => s + Number(t.amount), 0)
-    const mExpenses = monthTx
-      .filter((t) => t.type === 'expense')
-      .reduce((s, t) => s + Number(t.amount), 0)
+    const mIncome = monthTx.filter((t) => t.type === 'income').reduce((s, t) => s + Number(t.amount), 0)
+    const mExpenses = monthTx.filter((t) => t.type === 'expense').reduce((s, t) => s + Number(t.amount), 0)
     return { month: label, income: mIncome, expenses: mExpenses, balance: mIncome - mExpenses }
   })
 

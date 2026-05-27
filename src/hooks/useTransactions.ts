@@ -2,27 +2,27 @@ import { useState, useEffect, useCallback } from 'react'
 import { transactionService } from '../services/transaction.service'
 import { useAuth } from './useAuth'
 import type {
-  Transaction,
+  TransactionWithCategory,
   TransactionInsert,
   TransactionUpdate,
   TransactionFilters,
 } from '../types/finance.types'
 
 interface UseTransactionsReturn {
-  transactions: Transaction[]
+  transactions: TransactionWithCategory[]
   loading: boolean
   error: string | null
   filters: TransactionFilters
   setFilters: (filters: TransactionFilters) => void
   refetch: () => Promise<void>
-  create: (payload: Omit<TransactionInsert, 'user_id'>) => Promise<Transaction>
-  update: (id: string, payload: TransactionUpdate) => Promise<Transaction>
+  create: (payload: Omit<TransactionInsert, 'user_id'>) => Promise<TransactionWithCategory>
+  update: (id: string, payload: TransactionUpdate) => Promise<TransactionWithCategory>
   remove: (id: string) => Promise<void>
 }
 
 export function useTransactions(initialFilters?: TransactionFilters): UseTransactionsReturn {
   const { user } = useAuth()
-  const [transactions, setTransactions] = useState<Transaction[]>([])
+  const [transactions, setTransactions] = useState<TransactionWithCategory[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [filters, setFilters] = useState<TransactionFilters>(initialFilters ?? {})
@@ -44,10 +44,9 @@ export function useTransactions(initialFilters?: TransactionFilters): UseTransac
   useEffect(() => { fetch() }, [fetch])
 
   const create = useCallback(
-    async (payload: Omit<TransactionInsert, 'user_id'>): Promise<Transaction> => {
+    async (payload: Omit<TransactionInsert, 'user_id'>): Promise<TransactionWithCategory> => {
       if (!user) throw new Error('Not authenticated')
       const created = await transactionService.create({ ...payload, user_id: user.id })
-      // Optimistic update
       setTransactions((prev) => [created, ...prev])
       return created
     },
@@ -55,7 +54,7 @@ export function useTransactions(initialFilters?: TransactionFilters): UseTransac
   )
 
   const update = useCallback(
-    async (id: string, payload: TransactionUpdate): Promise<Transaction> => {
+    async (id: string, payload: TransactionUpdate): Promise<TransactionWithCategory> => {
       const updated = await transactionService.update(id, payload)
       setTransactions((prev) => prev.map((t) => (t.id === id ? updated : t)))
       return updated
@@ -64,12 +63,10 @@ export function useTransactions(initialFilters?: TransactionFilters): UseTransac
   )
 
   const remove = useCallback(async (id: string): Promise<void> => {
-    // Optimistic removal
     setTransactions((prev) => prev.filter((t) => t.id !== id))
     try {
       await transactionService.delete(id)
     } catch (e) {
-      // Rollback on error
       fetch()
       throw e
     }

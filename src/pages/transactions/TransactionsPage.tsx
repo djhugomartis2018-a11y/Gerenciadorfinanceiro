@@ -8,7 +8,7 @@ import { Modal } from '../../components/common/Modal'
 import { EmptyState } from '../../components/common/EmptyState'
 import { TransactionRowSkeleton } from '../../components/common/Skeleton'
 import { formatCurrency } from '../../utils/currency'
-import type { Transaction, TransactionFilters, TransactionInsert, TransactionUpdate } from '../../types/finance.types'
+import type { TransactionWithCategory, TransactionFilters, TransactionInsert, TransactionUpdate } from '../../types/finance.types'
 
 const EMPTY_FILTERS: TransactionFilters = {}
 
@@ -18,7 +18,7 @@ export default function TransactionsPage() {
     useTransactions()
 
   const [modalOpen, setModalOpen] = useState(false)
-  const [editingTx, setEditingTx] = useState<Transaction | null>(null)
+  const [editingTx, setEditingTx] = useState<TransactionWithCategory | null>(null)
   const [defaultType, setDefaultType] = useState<'income' | 'expense'>('expense')
 
   const categories = state.categories
@@ -29,7 +29,7 @@ export default function TransactionsPage() {
     setModalOpen(true)
   }
 
-  const openEdit = (tx: Transaction) => {
+  const openEdit = (tx: TransactionWithCategory) => {
     setEditingTx(tx)
     setModalOpen(true)
   }

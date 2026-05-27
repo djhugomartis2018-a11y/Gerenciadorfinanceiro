@@ -1,5 +1,4 @@
 import type { Goal } from './finance.types'
-
 export type { Goal }
 
 export interface GoalWithProgress extends Goal {
