@@ -364,12 +364,6 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             >
               Começar Agora <ArrowRight size={20} className="ml-2" />
             </Button>
-            <Button
-              variant="outline"
-              className="h-14 px-10 rounded-full border-white/10 bg-white/5 hover:bg-white/10 font-bold"
-            >
-              Ver Todos os Recursos
-            </Button>
           </div>
         </div>
       </section>
