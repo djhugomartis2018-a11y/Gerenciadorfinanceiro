@@ -192,13 +192,10 @@ export default function App() {
           setCurrentMonth(months[months.length - 1]);
         }
       } else {
-        // If no data in DB, try localStorage as fallback then save to DB
-        const localRaw = localStorage.getItem('gestao_salario_v2');
-        if (localRaw) {
-          const parsed = JSON.parse(localRaw);
-          setData(parsed);
-          await saveUserData(userId, parsed);
-        }
+        // Novo usuário — começa com dados limpos, ignora localStorage de outros usuários
+        const freshData = getDefaultData();
+        setData(freshData);
+        localStorage.removeItem('gestao_salario_v2');
       }
     } catch (err) {
       console.error('Error fetching data:', err);
