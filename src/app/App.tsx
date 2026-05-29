@@ -15,10 +15,10 @@ import {
 } from 'chart.js';
 import { Doughnut, Line } from 'react-chartjs-2';
 import { LayoutGrid, TrendingUp, Target, User, Plus, Trash2, LogOut, ChevronRight, Wallet, ArrowUpCircle, ArrowDownCircle, Calendar, Lock, CreditCard } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { supabase, supabaseUrl } from '../lib/supabase';
 import { useSubscription } from '../lib/useSubscription';
 import { canAddMonth, hasFeature, PLAN_NAMES, Plan } from '../lib/plans';
-import { BillingCycle, SubscriptionStatus } from '../lib/pricingConfig';
+import { BillingCycle, SubscriptionStatus, STRIPE_PRICE_IDS } from '../lib/pricingConfig';
 import { SubscriptionContext } from '../context/SubscriptionContext';
 import { UpgradeGate } from './components/ui/UpgradeGate';
 import { ManagePlanPage } from './components/billing/ManagePlanPage';
@@ -190,16 +190,31 @@ export default function App() {
 
   useEffect(() => { setPlan(supabasePlan); }, [supabasePlan]);
 
-  // ─── Stripe integration point ────────────────────────────────────────────
-  // Today:  mocks upgrade locally
-  // Future: replace body with Stripe Checkout redirect using STRIPE_PRICE_IDS
   async function subscribe(newPlan: Plan, cycle: BillingCycle) {
+    if (newPlan === 'basic') return;
     setBillingLoading(true);
-    await new Promise(r => setTimeout(r, 800));
-    setPlan(newPlan);
-    setBillingCycle(cycle);
-    setSubscriptionStatus('active');
-    setBillingLoading(false);
+    try {
+      const priceId = STRIPE_PRICE_IDS[newPlan][cycle];
+      const { data: { session: authSession } } = await supabase.auth.getSession();
+      const res = await fetch(
+        `${supabaseUrl}/functions/v1/create-checkout`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authSession?.access_token}`,
+          },
+          body: JSON.stringify({ priceId }),
+        }
+      );
+      const { url, error } = await res.json();
+      if (error) throw new Error(error);
+      window.location.href = url;
+    } catch (err) {
+      console.error('Stripe checkout error:', err);
+      toast.error('Erro ao iniciar pagamento. Tente novamente.');
+      setBillingLoading(false);
+    }
   }
 
   async function cancelSubscription() {
