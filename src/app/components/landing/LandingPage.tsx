@@ -57,14 +57,14 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
           {/* Top Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
             <div className="w-1.5 h-1.5 rounded-full bg-accent-lime animate-pulse" />
-            <span className="text-[11px] font-bold uppercase tracking-widest text-white/70">Otimize seu Fluxo Financeiro</span>
+            <span className="text-[11px] font-bold uppercase tracking-widest text-white/70">Você Registra. O Sistema Organiza.</span>
           </div>
 
           {/* Main Title */}
           <div className="space-y-6">
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
-              Eleve suas Finanças com<br />
-              <span className="bg-gradient-to-b from-white to-white/50 bg-clip-text text-transparent italic">Automação com IA</span>
+              Organize suas Finanças com<br />
+              <span className="bg-gradient-to-b from-white to-white/50 bg-clip-text text-transparent italic">Método e Clareza</span>
             </h1>
             <p className="text-lg text-white/50 max-w-2xl mx-auto font-medium">
               Uma plataforma inovadora que simplifica seu controle, aumenta sua eficiência e ajuda suas finanças a crescerem de forma organizada.
@@ -210,7 +210,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               <span className="text-white/60 italic">processos inteligentes e simples.</span>
             </h2>
             <p className="text-white/40 max-w-xl mx-auto text-sm font-medium">
-              Todas as ferramentas que você precisa para otimizar seus gastos, aumentar sua economia e crescer com confiança. Impulsionado por IA.
+              Todas as ferramentas que você precisa para acompanhar seus gastos, planejar com consistência e crescer com controle real.
             </p>
           </div>
 
@@ -285,7 +285,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             Pronto para transformar<br />suas finanças?
           </h2>
           <p className="text-white/50 text-lg font-medium">
-            Use a NAVEX para automatizar seu controle e economizar como nunca.
+            Use a NAVEX para organizar seu controle e acompanhar de perto cada mês.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
@@ -306,7 +306,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               <img src="/logobranca.svg" alt="NAVEX Finance" className="w-24 h-24" />
             </div>
             <p className="text-white/40 text-sm leading-relaxed">
-              Tornando a gestão financeira mais simples, inteligente e acessível para todos através da IA.
+              Tornando a gestão financeira mais simples, clara e acessível para quem gosta de método e organização.
             </p>
           </div>
           <div className="space-y-6">
