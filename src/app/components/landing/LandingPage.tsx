@@ -1,6 +1,7 @@
 import { ChevronRight, TrendingUp, Target, Wallet, BarChart3, ArrowRight, Sparkles, Smartphone, LayoutGrid, User, ArrowUpCircle, ArrowDownCircle, Calendar } from 'lucide-react';
 import { Button } from '../ui/button';
 import { PricingSection } from '../ui/pricing';
+import { ScrollShowcase } from './ScrollShowcase';
 interface LandingPageProps {
   onGetStarted: () => void;
 }
@@ -198,6 +199,8 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
       </section>
 
 
+
+      <ScrollShowcase />
 
       {/* Features Grid */}
       <section id="recursos" className="py-32 px-4 relative">
