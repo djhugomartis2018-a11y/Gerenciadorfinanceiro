@@ -255,32 +255,23 @@ export function ScrollShowcase() {
     offset: ['start start', 'end end'],
   });
 
-  // Headline fades out and moves up as user scrolls
-  const headlineY = useTransform(scrollYProgress, [0, 0.25], [0, -80]);
-  const headlineOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  // Headline sai rapidamente
+  const headlineY = useTransform(scrollYProgress, [0, 0.3], [0, -60]);
+  const headlineOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
 
-  // Browser frame animates in and scales up
-  const frameScale = useTransform(scrollYProgress, [0, 0.35], [0.72, 1]);
-  const frameY = useTransform(scrollYProgress, [0, 0.35], [60, 0]);
-  const frameOpacity = useTransform(scrollYProgress, [0.05, 0.3], [0, 1]);
-  const frameShadow = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [
-      '0 0 0px rgba(124,58,237,0)',
-      '0 0 80px rgba(124,58,237,0.25)',
-      '0 0 120px rgba(124,58,237,0.12)',
-    ]
-  );
+  // Frame: começa grande e visível, sobe levemente ao scrollar
+  const frameScale = useTransform(scrollYProgress, [0, 0.6], [0.9, 1.0]);
+  const frameY = useTransform(scrollYProgress, [0, 0.6], [24, 0]);
+  const frameOpacity = useTransform(scrollYProgress, [0, 0.08], [0, 1]);
 
-  // Floating elements animate in after frame appears
-  const floatOpacity = useTransform(scrollYProgress, [0.4, 0.65], [0, 1]);
-  const floatY = useTransform(scrollYProgress, [0.4, 0.65], [20, 0]);
+  // Floating badges aparecem na segunda metade
+  const floatOpacity = useTransform(scrollYProgress, [0.45, 0.7], [0, 1]);
+  const floatY = useTransform(scrollYProgress, [0.45, 0.7], [16, 0]);
 
   return (
     <section
       ref={containerRef}
-      className="relative h-[300vh] bg-[#0d0d0d]"
+      className="relative h-[180vh] bg-[#0d0d0d]"
     >
       {/* Sticky viewport */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
@@ -322,9 +313,8 @@ export function ScrollShowcase() {
             scale: frameScale,
             y: frameY,
             opacity: frameOpacity,
-            filter: frameShadow,
           }}
-          className="w-full max-w-5xl mx-auto px-6 relative z-10"
+          className="w-full max-w-6xl mx-auto px-4 relative z-10"
         >
           <BrowserFrame>
             <DashboardMockup />
